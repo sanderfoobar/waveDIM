@@ -49,7 +49,7 @@ class RenderStuff {
         this._renderer.setSize(window.innerWidth, window.innerHeight);
 
         //this._renderer.shadowMapEnabled = true;
-        //this._renderer.setPixelRatio(window.devicePixelRatio);
+        this._renderer.setPixelRatio(window.devicePixelRatio);
         this._container = document.getElementById('container');
         this._container.appendChild(this._renderer.domElement);
         this._composer = new THREE.EffectComposer(this._renderer);
@@ -121,6 +121,6 @@ class RenderStuff {
         this._camera.updateProjectionMatrix();
 
         this._renderer.setSize(window.innerWidth, window.innerHeight);
-        this._composer.setSize(window.innerWidth, window.innerHeight);
+        //this._composer.setSize(render._renderer.getSize().width, render._renderer.getSize().height);
     }
 }

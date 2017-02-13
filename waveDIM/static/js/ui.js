@@ -27,6 +27,8 @@ $(document).on("click", ".change_scene", function(){
         render.start(new SceneArrows());
     } else if(scene_name == "space cube"){
         render.start(new SceneSpaceShaders());
+    } else if(scene_name == "RGB shift"){
+        render.start(new SceneRGBShift());
     }
 });
 

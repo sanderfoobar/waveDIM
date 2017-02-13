@@ -16,10 +16,12 @@ class SceneSpaceShaders extends Scene {
         this.meshgroup_changed = null;
         this.matSmoke = null;
         this.matStars = null;
+        
+        // enable rendering through composer
         this.composer = true;
 
-        render._camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 1, 1000000);
-        render._camera.position.z = 1800;
+        render._camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 1, 10000);
+        render._camera.position.z = 1200;
         render._composer.addPass(new THREE.RenderPass(this.scene, render._camera));
 
         var effect = new THREE.ShaderPass(this.getDistortionShaderDefinition());
@@ -40,7 +42,7 @@ class SceneSpaceShaders extends Scene {
 
         var bgGeo = new THREE.PlaneGeometry(10000, 10000, 10, 10);
         var bg = new THREE.Mesh(bgGeo, this.matStars);
-        bg.position.z = -400;
+        bg.position.z = 0;
         this.scene.add(bg);
 
         this.meshgroup1 = this._mesh1();
@@ -60,7 +62,8 @@ class SceneSpaceShaders extends Scene {
 
     _mesh1(){
         let group = new THREE.Object3D();
-        group.position.z = 1200;
+        group.position.z = 600;
+        group.position.x = -100;
         group.name = "cubes";
 
         let object = new THREE.Object3D();
@@ -86,7 +89,8 @@ class SceneSpaceShaders extends Scene {
 
     _mesh2(){
         let group = new THREE.Object3D();
-        group.position.z = 1200;
+        group.position.z = 600;
+        group.position.x = -100;
         group.name = "spheres";
 
         let object = new THREE.Object3D();
@@ -123,15 +127,6 @@ class SceneSpaceShaders extends Scene {
     }
 
     initMaterials() {
-        this.matSmoke = new THREE.ShaderMaterial( {
-            uniforms: {
-                time: { type: 'f', value: 0.1 }
-            },
-            vertexShader: THREE.SmokeShader['vertexShader'],
-            fragmentShader: THREE.SmokeShader['fragmentShader'],
-            side:THREE.DoubleSide
-        });
-
         this.matStars = new THREE.ShaderMaterial( {
             uniforms: {
                 time: { type: 'f', value: 0.1 },
@@ -327,7 +322,7 @@ class SceneSpaceShaders extends Scene {
         this[this.meshgroup_current].rotation.x = Math.sin(this.x*200)/1.8;
         
         //this.matSmoke.uniforms[ 'time' ].value = render._iGlobalTime;
-        this.matStars.uniforms[ 'time' ].value = render._iGlobalTime*25;
+        this.matStars.uniforms[ 'time' ].value = render._iGlobalTime*1;
         this.matStars.uniforms[ 'mouse' ].value = new THREE.Vector2(render._iGlobalTime*0.0005, 1.0 );
 
         this.x += 0.0005;
