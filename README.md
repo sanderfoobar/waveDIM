@@ -14,9 +14,8 @@ http://radio.cedsys.nl
   - 3D engine built on top of `Three.js`
   - ECMAScript 6 classes
 
-## Notes
-
-  - Javascript cannot fetch remote audio streams without proper CORS headers due to security restrictions imposed by the browser so they're proxied by Flask with `requests`. See example.
+## CORS
+Javascript cannot fetch remote audio streams without proper CORS headers due to security restrictions imposed by the browser so they're proxied by Flask with `requests`. [Example](https://github.com/skftn/waveDIM/blob/master/examples/flask_proxy_audio.py).
 
 ## Installation
 
