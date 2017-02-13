@@ -1,0 +1,32 @@
+<script id="fragmentShaderLoader" type="x-shader/x-fragment">
+    uniform float percent;
+
+    uniform sampler2D texture1;
+
+    varying vec2 vUv;
+
+    void main() {
+        gl_FragColor = texture2D(texture1, vUv);
+        gl_FragColor = vec4(0.1,0.2,0.85,0.4);
+    }
+
+</script>
+
+<script id="vertexShaderLoader" type="x-shader/x-vertex">
+    varying vec2 vUv;
+
+    void main()
+    {
+        vUv = uv;
+
+        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+        gl_Position = projectionMatrix * mvPosition;
+    }
+</script>
+
+this.uniformsMove = {
+    percent: {type: "f", value: 0.1 },
+    texture1: {
+        type: "t",
+        value: new THREE.MeshLambertMaterial({ color:0, shading: THREE.FlatShading }) }
+};
