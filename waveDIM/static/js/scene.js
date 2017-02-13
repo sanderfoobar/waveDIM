@@ -121,5 +121,6 @@ class RenderStuff {
         this._camera.updateProjectionMatrix();
 
         this._renderer.setSize(window.innerWidth, window.innerHeight);
+        this._composer.setSize(window.innerWidth, window.innerHeight);
     }
 }
