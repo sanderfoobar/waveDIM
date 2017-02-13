@@ -15,7 +15,7 @@ http://radio.cedsys.nl
   - ECMAScript 6 classes
 
 ## CORS
-Javascript cannot fetch remote audio streams without proper CORS headers due to security restrictions imposed by the browser so they're proxied by Flask with `requests`. [Example](https://github.com/skftn/waveDIM/blob/master/examples/flask_proxy_audio.py).
+Javascript cannot fetch remote audio streams without proper CORS headers due to security restrictions imposed by the browser so they're proxied by Flask with `requests`. [Flask example](https://github.com/skftn/waveDIM/blob/master/examples/flask_proxy_audio.py) and [source](https://github.com/skftn/waveDIM/blob/master/waveDIM/controllers/shoutcast.py).
 
 ## Installation
 
