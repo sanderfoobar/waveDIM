@@ -56,7 +56,9 @@
                     <div class="streams" style="min-height:30px;"></div>
 
                     <br><br>
-
+                    <h3>Sound Controll</h3>
+                    <a class="change_radio" href="javascript:void(0);" onclick="render.audio.stop()">Stop audio</a>
+                    <br><br>
                     <h3>Scene selection</h3>
                     <div class="scenes">
                         <a class="change_scene" data-name="waveform">Waveform</a><br>
@@ -95,12 +97,12 @@
             };
 
             $(document).ready(function(){
-                // setup render 'engine' *kugh* *kugh*
+                // setup render 'engine' *kugh* *kugh* Whatsup? Got a cold?
                 render = new RenderStuff();
                 render.start(new SceneWaveform());
 
                 // default radio station
-                render.audio.start_stream("/stream/coldbustedradio", "coldbustedradio");
+                render.audio.start_stream("/stream/arrownl", "arrownl");
             });
         </script>
     </body>
