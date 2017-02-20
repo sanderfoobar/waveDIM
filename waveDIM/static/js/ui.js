@@ -42,7 +42,7 @@ $(document).on("click", ".change_mute", function(){
         $(this).attr("data-name", 'Un Mute');
         $(this).text("Un Mute");
     } else if(mute_status == "Un Mute") {
-        render.audio.audioTag.volume += 1;
+        render.audio.audioTag.volume = 1;
         console.log("Un muted audio");
         $(this).attr("data-name", "Mute");
         $(this).text("Mute");
