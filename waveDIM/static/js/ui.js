@@ -39,11 +39,11 @@ $(document).on("click", ".change_mute", function(){
     if(mute_status == "Mute"){
         render.audio.audioTag.volume = 0;
         console.log("Muted audio");
-        $(this).attr("data-name", 'Un Mute');
-        $(this).text("Un Mute");
-    } else if(mute_status == "Un Mute") {
+        $(this).attr("data-name", 'Unmute');
+        $(this).text("Unmute");
+    } else if(mute_status == "Unmute") {
         render.audio.audioTag.volume = 1;
-        console.log("Un muted audio");
+        console.log("Unmuted audio");
         $(this).attr("data-name", "Mute");
         $(this).text("Mute");
     }
