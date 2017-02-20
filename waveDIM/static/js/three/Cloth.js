@@ -263,7 +263,7 @@ function simulate( time ) {
 
 	}
 
-	// Start Constrains
+	// StartMusic Constrains
 
 	constrains = cloth.constrains,
 	il = constrains.length;

@@ -741,7 +741,7 @@ THREE.SoftwareRenderer = function ( parameters ) {
 
 		var q = blockSize;
 
-		// Start in corner of 8x8 block
+		// StartMusic in corner of 8x8 block
 
 		minx &= ~ ( q - 1 );
 		miny &= ~ ( q - 1 );
