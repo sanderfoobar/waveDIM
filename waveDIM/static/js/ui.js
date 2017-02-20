@@ -19,6 +19,7 @@ $(document).on("click", ".change_radio", function(){
     }
 });
 
+// Change animation
 $(document).on("click", ".change_scene", function(){
     var scene_name = $(this).attr("data-name");
     if(scene_name == "waveform"){
@@ -29,6 +30,22 @@ $(document).on("click", ".change_scene", function(){
         render.start(new SceneSpaceShaders());
     } else if(scene_name == "RGB shift"){
         render.start(new SceneRGBShift());
+    }
+});
+
+// Muting and un muting audio button.
+$(document).on("click", ".change_mute", function(){
+    var mute_status = $(this).attr("data-name");
+    if(mute_status == "Mute"){
+        render.audio.audioTag.volume = 0;
+        console.log("Muted audio");
+        $(this).attr("data-name", 'Un Mute');
+        $(this).text("Un Mute");
+    } else if(mute_status == "Un Mute") {
+        render.audio.audioTag.volume = 1;
+        console.log("Un muted audio");
+        $(this).attr("data-name", "Mute");
+        $(this).text("Mute");
     }
 });
 
