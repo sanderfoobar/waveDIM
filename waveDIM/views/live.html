@@ -57,7 +57,8 @@
 
                     <br><br>
                     <h3>Sound Controll</h3>
-                    <a class="change_radio" href="javascript:void(0);" onclick="render.audio.stop()">Stop audio</a>
+                    <a class="change_mute" data-name="Mute">Mute</a><br>
+
                     <br><br>
                     <h3>Scene selection</h3>
                     <div class="scenes">
@@ -102,7 +103,7 @@
                 render.start(new SceneWaveform());
 
                 // default radio station
-                render.audio.start_stream("/stream/arrownl", "arrownl");
+                render.audio.start_stream("/stream/coldbustedradio", "coldbustedradio");
             });
         </script>
     </body>
