@@ -32,6 +32,23 @@ $(document).on("click", ".change_scene", function(){
     }
 });
 
+// Muting and unmuting audio button.
+$(document).on("click", ".change_mute", function() {
+    let mute_status = $(this).attr("data-name");
+    if (mute_status == "Mute") {
+        render.audio.audioTag.volume = 0;
+        console.log("Muted audio");
+        $(this).attr("data-name", 'Unmute');
+        $(this).text("Unmute");
+    } else if (mute_status == "Unmute") {
+        render.audio.audioTag.volume = 1;
+        console.log("Unmuted audio");
+        $(this).attr("data-name", "Mute");
+        $(this).text("Mute");
+    }
+});
+
+
 // populate radio streams
 function radiostreams(){
     if(!window.hasOwnProperty("render")) return setTimeout(radiostreams, 200);
