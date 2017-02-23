@@ -29,6 +29,8 @@ $(document).on("click", ".change_scene", function(){
         render.start(new SceneSpaceShaders());
     } else if(scene_name == "RGB shift"){
         render.start(new SceneRGBShift());
+    } else if(scene_name == "test"){
+        render.start(new SceneTest());
     }
 });
 
