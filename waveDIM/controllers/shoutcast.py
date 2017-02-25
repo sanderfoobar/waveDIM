@@ -1,5 +1,6 @@
+#!/usr/bin/python3
 import requests
-from urllib import unquote_plus
+from urllib.parse import unquote_plus
 from requests.packages.urllib3.exceptions import ReadTimeoutError, ProtocolError
 from requests.exceptions import HTTPError, StreamConsumedError, ConnectionError, ChunkedEncodingError
 __author__ = "Sander Ferdinand"
@@ -27,11 +28,11 @@ def get(url, user_agent="VLC/2.2.4 LibVLC/2.2.4", referer="", mime=False):
         if not response.headers["content-type"]:
             raise HTTPError("Response headers `Content-Type` not found "
                             "while enforcing a specific mime type.")
-        if isinstance(mime, (str, unicode)) and \
+        if isinstance(mime, str) and \
                         mime != response.headers["content-type"]:
             raise HTTPError("bad mime")
 
-    for header, value in response.headers.iteritems():
+    for header, value in response.headers.items():
         if header.startswith("icy-"):
             if not METADATA.get(response.url, None):
                 METADATA[response.url] = {"server": {}, "info": {}}
@@ -91,7 +92,7 @@ def iter_content(response, chunk_size=1024*10):
                     state += 1
                 elif state == 2:
                     chunk = response.raw.read(bufsize_metadata)
-                    if any(s in chunk for s in ["StreamTitle", "=", ";"]):
+                    if any(s in chunk.decode('utf-8') for s in ["StreamTitle", "=", ";"]):
                         if len(chunk) >= 16:
                             metadata = icy_parse(chunk)
                             METADATA[response.url]["info"] = metadata

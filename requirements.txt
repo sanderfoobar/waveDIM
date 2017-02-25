@@ -2,3 +2,4 @@ requests
 gevent
 jinja2
 flask
+flask-session

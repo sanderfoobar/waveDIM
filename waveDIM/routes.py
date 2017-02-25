@@ -1,4 +1,5 @@
-from flask import render_template, send_from_directory, Response, redirect, jsonify
+from datetime import datetime
+from flask import render_template, send_from_directory, Response, redirect, jsonify, session, request, abort
 
 from waveDIM import app
 import waveDIM.controllers.shoutcast as shoutcast
@@ -9,17 +10,32 @@ __author__ = "Sander Ferdinand"
 
 @app.route("/")
 def index():
+    if not session.get("wishlist", ""):
+        session["wishlist"] = []
     return render_template("live.html", streams=streams)
+
+
+@app.route("/api/wishlist", methods=["GET", "POST"])
+def wishlist():
+    # if not session.get("wishlist", ""):
+    #     session["wishlist"] = []
+    #
+    # if request.method == "POST":
+    #
+    #     return jsonify({"status": "OK"})
+    # elif request.method == "GET":
+    #     return jsonify({"data": session["wishlist"]})
+    pass
 
 
 @app.route("/api/metadata")
 def metadata():
     data = {}
 
-    for stream_id, _data in streams.iteritems():
+    for stream_id, _data in streams.items():
         data[stream_id] = _data
 
-        for stream_url, _metadata in shoutcast.METADATA.iteritems():
+        for stream_url, _metadata in shoutcast.METADATA.items():
             if _data["stream"] == stream_url:
                 data[stream_id]["metadata"] = _metadata
 
@@ -44,3 +60,12 @@ def proxyradio(path):
 @app.route('/static/<path:path>')
 def static(path):
     return send_from_directory('static', path)
+
+@app.route('/set/')
+def set():
+    return 'ok'
+
+
+@app.route('/get/')
+def get():
+    return str(session.get('key', 'not set'))

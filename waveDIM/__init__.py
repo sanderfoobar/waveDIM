@@ -1,11 +1,9 @@
 import os
 import settings
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_session import Session
 
-from jinja2 import Environment, FileSystemLoader
-__author__ = "Sander Ferdinand"
-
-jinja2_env = Environment(loader=FileSystemLoader('paste/themes/'))
 app = Flask(import_name=__name__,
             static_folder=None,
             template_folder='views')
@@ -14,8 +12,16 @@ app.config['SECRET_KEY'] = settings.app_secret
 app.config['dir_base'] = os.path.dirname(os.path.abspath(__file__))
 app.config['dir_root'] = '/'.join(app.config['dir_base'].split('/')[:-1])
 app.config['APPLICATION_ROOT'] = settings.BIND_ROUTE
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///%s/data/db.sqlite3" % app.config['dir_root']
 
-SECRET_KEY = settings.app_secret
+db = SQLAlchemy(app)
+SESSION_TYPE = 'sqlalchemy'
+SESSION_PERMANENT = True
+SESSION_SQLALCHEMY = db
+app.config.from_object(__name__)
+Session(app)
 
-# init routes
 import waveDIM.routes
+from waveDIM.controllers.multiplexer import StreamFactory
+stream_factory = StreamFactory()
+db.create_all()
