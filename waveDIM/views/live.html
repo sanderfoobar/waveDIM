@@ -1,112 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>radio.cedsys.nl [live example]</title>
-        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+{% extends "base.html" %}
+{% block content %}
+    <div id="container"></div>
+    <div class="sidenav">
+        <div class="content">
+            <h2>radio.cedsys.nl</h2>
+            <small>Powered by <a target="_blank" href="https://github.com/skftn/waveDIM/">waveDIM</a></small>
+            <br><br>
+            <div style="opacity:0.7">
+                <h3>Sound input</h3>
+                <div class="streams" style="min-height:30px;"></div>
 
-        <link rel="stylesheet" href="/static/radio.css">
-
-        <!-- waveDIM includes -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="/static/js/audio.js"></script>
-        <script src="/static/js/scene.js"></script>
-        <script src="/static/js/ui.js"></script>
-
-        <!-- Three.js includes -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.min.js"></script>
-        <script src="/static/js/three/Detector.js"></script>
-        <script src="/static/js/three/core/Clock.js"></script>
-        <script src="/static/js/three/controls/OrbitControls.js"></script>
-        <script src="/static/js/three/geometries/ConeGeometry.js"></script>
-        <script src="/static/js/three/geometries/SphereGeometry.js"></script>
-        <script src="/static/js/three/shaders/CopyShader.js"></script>
-        <script src="/static/js/three/shaders/BokehShader.js"></script>
-        <script src="/static/js/three/geometries/TextGeometry.js"></script>
-        <script src="/static/js/three/postprocessing/EffectComposer.js"></script>
-        <script src="/static/js/three/postprocessing/RenderPass.js"></script>
-        <script src="/static/js/three/postprocessing/ShaderPass.js"></script>
-        <script src="/static/js/three/postprocessing/MaskPass.js"></script>
-        <script src="/static/js/three/postprocessing/BokehPass.js"></script>
-        <script src="/static/js/three/shaders/SepiaShader.js"></script>
-        <script src="/static/js/three/shaders/MirrorShader.js"></script>
-        <script src="/static/js/three/shaders/FXAAShader.js"></script>
-        <script src="/static/js/three/shaders/VignetteShader.js"></script>
-		<script src="/static/js/three/shaders/DotScreenShader.js"></script>
-		<script src="/static/js/three/shaders/RGBShiftShader.js"></script>
-        <script src="/static/js/three/loaders/FBXLoader.js"></script>
-        <script src="/static/js/shader_star.js"></script>
-        <script src="/static/js/shader_smoke.js"></script>
-
-        <!-- scenes -->
-        <script src="/static/js/scene_arrows.js"></script>
-        <script src="/static/js/scene_waveform.js"></script>
-        <script src="/static/js/scene_spaceshaders.js"></script>
-        <script src="/static/js/scene_rgbshift.js"></script>
-        <script src="/static/js/fbx_test.js"></script>
-    </head>
-    <body>
-        <div id="container"></div>
-        <div class="sidenav">
-            <div class="content">
-                <h2>radio.cedsys.nl</h2>
-                <small>Powered by <a target="_blank" href="https://github.com/skftn/waveDIM/">waveDIM</a></small>
                 <br><br>
-                <div style="opacity:0.7">
-                    <h3>Sound input:</h3>
-                    <div class="streams" style="min-height:30px;"></div>
+                <h3>Sound Control</h3>
+                <a class="change_mute" data-name="Mute">Mute</a><br>
+                <br><br>
 
-                    <br><br>
-                    <h3>Sound Control</h3>
-                    <a class="change_mute" data-name="Mute">Mute</a><br>
-                    <br><br>
-
-                    <h3>Scene selection</h3>
-                    <div class="scenes">
-                        <a class="change_scene" data-name="waveform">Waveform</a><br>
-                        <a class="change_scene" data-name="arrows">Triangles</a><br>
-                        <a class="change_scene" data-name="space cube">Space</a><br>
-                        <!--<a class="change_scene" data-name="test">ttttt</a><br>-->
-                        <!--<a class="change_scene" data-name="RGB shift">RGBShift</a><br>-->
-                    </div>
-
-                    <br><br>
-
-                    <h3>Metadata</h3>
-                    <div class="metadata"></div>
+                <h3>Scene selection</h3>
+                <div class="scenes">
+                    <a class="change_scene" data-name="waveform">Waveform</a><br>
+                    <a class="change_scene" data-name="arrows">Triangles</a><br>
+                    <a class="change_scene" data-name="space cube">Space</a><br>
+                    <!--<a class="change_scene" data-name="test">ttttt</a><br>-->
+                    <!--<a class="change_scene" data-name="RGB shift">RGBShift</a><br>-->
                 </div>
+
+                <br><br>
+                <h3>Metadata</h3>
+                <div class="metadata"></div>
             </div>
         </div>
+    </div>
 
-        <script>
-            function wohlolxss(inp){return inp.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+    <script>
+        function wohlolxss(inp){return inp.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+        var render = null;
 
-            var render = null;
-            var api = function(api_method, method, data) {
-                let _data = {
-                    url: `/api/${api_method}`,
-                    type: method,
-                    contentType: 'application/json',
-                    timeout: 15500
-                };
-
-                if (method == "POST") {
-                    _data.data = JSON.stringify(data);
-                }
-
-                return $.ajax(_data).then(function(data){
-                    return data;
-                });
+        var api = function(api_method, method, data){
+            let _data = {
+                url: `/api/${api_method}`,
+                type: method,
+                contentType: 'application/json',
+                timeout: 15500
             };
 
-            $(document).ready(function(){
-                // setup render 'engine' *kugh* *kugh*
-                render = new RenderStuff();
-                render.start(new SceneWaveform());
+            if (method == "POST"){
+                _data.data = JSON.stringify(data);
+            }
 
-                // default radio station
-                render.audio.start_stream("/stream/coldbustedradio", "coldbustedradio");
+            return $.ajax(_data).then(function(data){
+                return data;
             });
-        </script>
-    </body>
-</html>
+        };
+
+        $(document).ready(function(){
+            // setup render 'engine' *kugh* *kugh*
+            render = new RenderStuff();
+            render.start(new SceneWaveform());
+
+            // default radio station
+            render.audio.start_stream("/stream/coldbustedradio", "coldbustedradio");
+        });
+    </script>
+{% endblock %}

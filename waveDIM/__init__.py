@@ -21,7 +21,9 @@ SESSION_SQLALCHEMY = db
 app.config.from_object(__name__)
 Session(app)
 
-import waveDIM.routes
 from waveDIM.controllers.multiplexer import StreamFactory
 stream_factory = StreamFactory()
 db.create_all()
+
+import waveDIM.routes
+

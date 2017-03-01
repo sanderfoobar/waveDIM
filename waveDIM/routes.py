@@ -3,6 +3,7 @@ from flask import render_template, send_from_directory, Response, redirect, json
 
 from waveDIM import app
 import waveDIM.controllers.shoutcast as shoutcast
+from waveDIM import stream_factory
 from settings import streams
 
 __author__ = "Sander Ferdinand"
@@ -61,11 +62,11 @@ def proxyradio(path):
 def static(path):
     return send_from_directory('static', path)
 
-@app.route('/set/')
-def set():
-    return 'ok'
 
-
-@app.route('/get/')
-def get():
-    return str(session.get('key', 'not set'))
+# @app.route('/w')
+# def proxy_stream():
+#     stream_url = "http://icecast.omroep.nl/radio1-bb-mp3"
+#     plexer = stream_factory(stream_url).get_stream()
+#     response = shoutcast.get(stream_url)
+#     return Response(response=shoutcast.iter_content(response),
+#                     content_type=response.headers['Content-Type'])
