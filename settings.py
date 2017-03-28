@@ -10,7 +10,7 @@ streams = {
     "arrownl": {
         "id": "arrownl",
         "title": "Arrow Classic Rock",
-        "stream": "http://91.221.151.155:80",
+        "stream": "http://91.221.151.155:80/stream",
         "referer": "player.arrow.nl",
         "user-agent": "Mozilla 4",
         "mime": "audio/mpeg"
