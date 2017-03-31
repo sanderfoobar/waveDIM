@@ -63,6 +63,11 @@ def static(path):
     return send_from_directory('static', path)
 
 
+@app.route("/favicon.ico")
+def ico():
+    return ""
+
+
 # @app.route('/w')
 # def proxy_stream():
 #     stream_url = "http://icecast.omroep.nl/radio1-bb-mp3"
