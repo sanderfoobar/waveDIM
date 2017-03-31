@@ -23,9 +23,12 @@ class Scene {
         }
 
         if(render._composer) {
+            console.log("composer");
             console.log(render._composer.passes.length);
         }
+
         console.log("teardown");
+        render._composer.passes = [];
     }
 }
 
