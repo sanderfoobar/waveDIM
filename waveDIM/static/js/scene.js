@@ -41,12 +41,19 @@ class RenderStuff {
         this.scenes = {
             "waveform": SceneWaveform,
             "arrows": SceneArrows,
-            "space3d": SceneSpaceShaders
+            "space1": SceneSpace1,
+            "space2": SceneSpace2,
+            "cubescape": SceneCubescape
         };
 
         this._camera = null;
         this._controls = null;
         this._frame_id = null;
+
+        // ShaderToy
+        this.iResolution = { type: "v2", value: new THREE.Vector3() };
+        this.iResolution.value.x = window.innerWidth;
+        this.iResolution.value.y = window.innerHeight;
 
         this._renderer = new THREE.WebGLRenderer({antialias: true});
         this._renderer.setSize(window.innerWidth, window.innerHeight);
@@ -56,10 +63,6 @@ class RenderStuff {
         this._container = document.getElementById('container');
         this._container.appendChild(this._renderer.domElement);
         this._composer = new THREE.EffectComposer(this._renderer);
-        this._uniforms = {
-            time: { type: "f", value: 1.0 },
-            resolution: { type: "v2", value: new THREE.Vector3() }
-        };
 
         this._clock = new THREE.Clock();
         this._fps = 30;
@@ -98,14 +101,16 @@ class RenderStuff {
     }
 
     render(){
+        // update audio freq data
+        render.audio.audio_analyzer.getByteFrequencyData(render.audio.audio_liveWaveformData);
+        
         this.scene.loop();
 
-        let delta = this._clock.getDelta();
         this._iGlobalTime = this._clock.getElapsedTime();
-        this._uniforms.time.value += delta;
 
         if(this.scene.composer) {
-            this._composer.render();
+            //this._composer.render();  # doesnt work :(
+            this._renderer.render(this.scene.scene, this._camera);
         } else {
             this._renderer.render(this.scene.scene, this._camera);
         }
@@ -117,13 +122,13 @@ class RenderStuff {
     }
 
     onWindowResize(event) {
-        this._uniforms.resolution.value.x = window.innerWidth;
-        this._uniforms.resolution.value.y = window.innerHeight;
-
         this._camera.aspect = window.innerWidth / window.innerHeight;
         this._camera.updateProjectionMatrix();
 
         this._renderer.setSize(window.innerWidth, window.innerHeight);
+
+        this.iResolution.value.x = window.innerWidth;
+        this.iResolution.value.y = window.innerHeight;
         //this._composer.setSize(render._renderer.getSize().width, render._renderer.getSize().height);
     }
 }

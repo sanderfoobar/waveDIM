@@ -48,6 +48,7 @@ class AudioHelper {
         this.audio_analyzer.fftSize = 512;
         //this.audio_rangeSmoothing.value = this.audio_analyzer.smoothingTimeConstant;
 
+        this.audio_liveNumSamples = this.audio_analyzer.frequencyBinCount;
         this.audio_liveFreqData = new Float32Array(this.audio_analyzer.frequencyBinCount);
         this.audio_liveWaveformData = new Uint8Array(this.audio_analyzer.frequencyBinCount);
         this.audio_isPlaying = false;

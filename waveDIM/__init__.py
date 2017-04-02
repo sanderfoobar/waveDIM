@@ -8,6 +8,7 @@ app = Flask(import_name=__name__,
             static_folder=None,
             template_folder='views')
 
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config['SECRET_KEY'] = settings.app_secret
 app.config['dir_base'] = os.path.dirname(os.path.abspath(__file__))
 app.config['dir_root'] = '/'.join(app.config['dir_base'].split('/')[:-1])

@@ -17,11 +17,11 @@
 
                 <h3>Scene selection</h3>
                 <div class="scenes">
-                    <a class="change_scene" data-name="waveform">Waveform</a><br>
-                    <a class="change_scene" data-name="arrows">Triangles</a><br>
-                    <a class="change_scene" data-name="space cube">Space</a><br>
-                    <!--<a class="change_scene" data-name="test">ttttt</a><br>-->
-                    <!--<a class="change_scene" data-name="RGB shift">RGBShift</a><br>-->
+                    <a class="change_scene" data-name="waveform">Waveform</a>
+                    <a class="change_scene" data-name="arrows">Triangles</a>
+                    <a class="change_scene" data-name="cubescape">Cubescape</a>
+                    <a class="change_scene" data-name="space1">Space1</a>
+                    <a class="change_scene" data-name="space2">Space2</a>
                 </div>
 
                 <br><br>
@@ -58,7 +58,7 @@
             render.start(new SceneWaveform());
 
             // default radio station
-            render.audio.start_stream("/stream/coldbustedradio", "coldbustedradio");
+            render.audio.start_stream("/stream/npo1", "npo1");
         });
     </script>
 {% endblock %}

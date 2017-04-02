@@ -23,14 +23,19 @@ $(document).on("click", ".change_scene", function(){
     var scene_name = $(this).attr("data-name");
     if(scene_name == "waveform"){
         render.start(new SceneWaveform());
+
     } else if(scene_name == "arrows") {
         render.start(new SceneArrows());
-    } else if(scene_name == "space cube"){
-        render.start(new SceneSpaceShaders());
-    } else if(scene_name == "RGB shift"){
-        render.start(new SceneRGBShift());
-    } else if(scene_name == "test"){
-        render.start(new SceneTest());
+
+    } else if(scene_name == "cubescape"){
+        render.start(new SceneCubescape());
+
+    } else if(scene_name == "space1"){
+        render.start(new SceneSpace1());
+
+    } else if(scene_name == "space2"){
+        render.start(new SceneSpace2());
+
     }
 });
 
