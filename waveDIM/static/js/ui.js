@@ -58,7 +58,7 @@ $(document).on("click", ".change_mute", function() {
 
 // populate radio streams
 function radiostreams(){
-    if(!window.hasOwnProperty("render") || !render.audio.audioTag) return setTimeout(radiostreams, 200);
+    if(!window.hasOwnProperty("render") || !render.hasOwnProperty("audio") || !render.audio.audioTag) return setTimeout(radiostreams, 200);
 
     var sel_streams = $(".sidenav .streams");
     let sel_html = sel_streams.html();
