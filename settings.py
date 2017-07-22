@@ -41,7 +41,7 @@ streams = {
     },
     "schwany3": {
         "id": "schwany3",
-        "title": "Volksmusik",
+        "title": "Schwany 3 Volksmusik",
         "stream": "http://167.114.246.177:8110/stream",
         "referer": "schwany3.radio.de",
         "user-agent": "Mozilla 4",
