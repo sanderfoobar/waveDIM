@@ -39,5 +39,13 @@ streams = {
         "user-agent": "Mozilla 4",
         "mime": "audio/mpeg"
     },
+    "schwany3": {
+        "id": "schwany3",
+        "title": "Volksmusik",
+        "stream": "http://167.114.246.177:8110/stream",
+        "referer": "schwany3.radio.de",
+        "user-agent": "Mozilla 4",
+        "mime": "audio/mpeg"
+    },
 }
 
